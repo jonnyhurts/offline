@@ -522,37 +522,63 @@ export default function TalentDashboard() {
           </div>
         )}
 
-        {/* My REALS */}
-        {activeTab === "reals" && (
-          <div>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-black">My REALS</h2>
-              <button
-                onClick={() => setActiveTab("upload")}
-                className="bg-offline-orange hover:bg-offline-orange-light text-white font-bold px-5 py-2 rounded-full text-sm transition-colors"
-              >
-                + New REAL
-              </button>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[
-                { title: "Behind the Studio", date: "Feb 2026", status: "Shipped", subscribers: 1247 },
-                { title: "Tour Diary: Oslo", date: "Jan 2026", status: "Shipped", subscribers: 1189 },
-                { title: "Making of 'Echoes'", date: "Dec 2025", status: "Shipped", subscribers: 1102 },
-                { title: "Personal Message: New Year", date: "Nov 2025", status: "Shipped", subscribers: 998 },
-              ].map((real) => (
-                <div key={real.title} className="bg-white/5 border border-white/10 rounded-xl p-5 hover:border-offline-orange/30 transition-colors">
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="w-12 h-12 bg-offline-orange/20 rounded-lg flex items-center justify-center text-xl">🎞️</div>
-                    <span className="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full font-bold">{real.status}</span>
-                  </div>
-                  <h3 className="font-bold mb-1">{real.title}</h3>
-                  <p className="text-white/40 text-sm">{real.date} — {real.subscribers.toLocaleString()} shipped</p>
+        {/* My REALS — only confirmed months */}
+        {activeTab === "reals" && (() => {
+          const confirmedMonths = Object.entries(monthsData)
+            .filter(([, data]) => data.confirmed)
+            .map(([idx, data]) => ({ monthIndex: Number(idx), data }));
+
+          return (
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-black">My REALS</h2>
+                <button
+                  onClick={() => setActiveTab("upload")}
+                  className="bg-offline-orange hover:bg-offline-orange-light text-white font-bold px-5 py-2 rounded-full text-sm transition-colors"
+                >
+                  + New REAL
+                </button>
+              </div>
+
+              {confirmedMonths.length === 0 ? (
+                <div className="text-center py-16">
+                  <div className="text-white/20 text-6xl mb-4">0</div>
+                  <p className="text-white/40 font-bold mb-2">No REALS yet</p>
+                  <p className="text-white/25 text-sm mb-6">
+                    Upload and confirm pictures for a month to create your first REAL.
+                  </p>
+                  <button
+                    onClick={() => setActiveTab("upload")}
+                    className="bg-offline-orange hover:bg-offline-orange-light text-white font-bold px-6 py-3 rounded-full transition-colors"
+                  >
+                    Go to Upload
+                  </button>
                 </div>
-              ))}
+              ) : (
+                <div className="space-y-10">
+                  {confirmedMonths.map(({ monthIndex, data }) => (
+                    <div key={monthIndex} className="bg-white/5 border border-white/10 rounded-2xl p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <div>
+                          <h3 className="text-lg font-black">{MONTHS[monthIndex]} 2026</h3>
+                          <p className="text-white/40 text-sm">11 pictures confirmed</p>
+                        </div>
+                        <span className="text-xs bg-green-500/20 text-green-400 px-3 py-1.5 rounded-full font-bold">
+                          Confirmed
+                        </span>
+                      </div>
+                      <ViewMasterDisc
+                        images={data.images}
+                        month={MONTHS[monthIndex]}
+                        year="2026"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
-        )}
+          );
+        })()}
 
         {/* Subscribers */}
         {activeTab === "subscribers" && (
