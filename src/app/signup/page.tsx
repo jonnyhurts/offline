@@ -102,7 +102,7 @@ export default function SignUpPage() {
                 Talent / Creator
               </div>
               <div className="text-white/50 text-sm">
-                Artist, musician, athlete, influencer, or brand looking to share exclusive content.
+                Artist, musician, athlete, influencer, or brand ready to share exclusive pictures with your fans.
               </div>
             </button>
             <button
@@ -113,7 +113,7 @@ export default function SignUpPage() {
                 Fan / Subscriber
               </div>
               <div className="text-white/50 text-sm">
-                Subscribe to your favorite talent and receive exclusive REALS monthly.
+                Receive exclusive physical collectibles from the talent you love, every month.
               </div>
             </button>
           </div>

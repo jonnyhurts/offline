@@ -16,7 +16,7 @@ export default function ForFansPage() {
             OWN THE<br />MOMENT
           </h1>
           <p className="text-xl text-black/80 max-w-2xl mb-10 font-medium">
-            Get exclusive content from your favorite talent — delivered as physical collectibles you can hold, watch, and keep forever.
+            Exclusive pictures from your favorite talent — delivered as physical collectibles you can hold, collect, and keep forever.
           </p>
           <Link
             href="/signup?role=fan"
@@ -36,12 +36,12 @@ export default function ForFansPage() {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { title: "Monthly REALS", desc: "A physical collectible delivered to your door every month, featuring exclusive content from your chosen talent." },
-              { title: "Behind the Scenes", desc: "See what others don't. Personal footage, studio sessions, training clips — raw and unfiltered." },
-              { title: "Personal Messages", desc: "Receive direct messages from your favorite talent, made exclusively for subscribers." },
+              { title: "Monthly REALS", desc: "A physical collectible delivered to your door every month, featuring 10 exclusive pictures from your chosen talent." },
+              { title: "Never-Seen-Before", desc: "Every picture is exclusive to OFFL/NE. You see what nobody else gets to see." },
+              { title: "Truly Yours", desc: "These aren't digital files that anyone can screenshot. They're physical items, made for you." },
               { title: "Limited Editions", desc: "Every REAL is limited. What you receive becomes a rare, collectible item." },
-              { title: "No Screens Required", desc: "Watch your REALS offline. No phone, no app, no scrolling — just pure content." },
-              { title: "Build Your Collection", desc: "Each month adds to your collection. Trade, display, or keep them safe — they're yours." },
+              { title: "No Screens Required", desc: "Hold your REALS in your hands. No phone, no app, no scrolling — just pure content." },
+              { title: "Build Your Collection", desc: "Each month adds to your collection. Display, trade, or keep them safe — they're yours forever." },
             ].map((item) => (
               <div key={item.title} className="border border-white/10 rounded-xl p-6 hover:border-offline-orange/40 transition-colors">
                 <h3 className="text-lg font-bold mb-2">{item.title}</h3>
@@ -60,10 +60,10 @@ export default function ForFansPage() {
           </h2>
           <div className="space-y-10">
             {[
-              { step: "1", title: "Browse Talent", desc: "Explore creators, athletes, musicians, and influencers on OFFL/NE." },
-              { step: "2", title: "Subscribe", desc: "Choose your favorites and subscribe. Monthly delivery, cancel anytime." },
-              { step: "3", title: "Receive Your REALS", desc: "Physical collectibles arrive at your door. Worldwide shipping included." },
-              { step: "4", title: "Collect & Enjoy", desc: "Watch, collect, trade. Each REAL is yours to keep forever." },
+              { step: "1", title: "Browse Talent", desc: "Explore artists, athletes, musicians, and influencers on OFFL/NE." },
+              { step: "2", title: "Subscribe", desc: "Pick your favorites and subscribe. Monthly delivery, cancel anytime." },
+              { step: "3", title: "Receive Your REALS", desc: "Physical collectibles arrive at your door every month. Worldwide shipping included." },
+              { step: "4", title: "Collect Forever", desc: "Each REAL is yours to keep. Build your collection, display it, treasure it." },
             ].map((item) => (
               <div key={item.step} className="flex gap-6 items-start">
                 <div className="w-14 h-14 rounded-full bg-offline-orange flex items-center justify-center text-xl font-black text-black flex-shrink-0">

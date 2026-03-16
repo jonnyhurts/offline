@@ -18,10 +18,10 @@ export default function AboutPage() {
           </h1>
           <div>
             <p className="text-xl text-black/80 font-bold mb-4">
-              We&apos;re transforming a classic viewing format into something entirely new.
+              Exclusive pictures from the people you admire — delivered as physical collectibles you can hold, own, and collect.
             </p>
             <p className="text-black/60 text-lg">
-              A physical collectible that creates a deeper connection between talent and their audience. Delivered in a way no other platform can offer.
+              OFFL/NE is the platform where talent and fans connect through something real. No feeds, no algorithms — just personal moments, delivered to your door.
             </p>
           </div>
         </div>
@@ -37,15 +37,15 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div className="space-y-6 text-white/70 text-lg leading-relaxed">
               <p>
-                OFFL/NE is a platform that allows talent — artists, athletes, musicians, brands, and influencers — to share exclusive, personal content with their audience in a completely new way.
+                OFFL/NE is a platform where talent — artists, athletes, musicians, brands, and influencers — share exclusive pictures with their most dedicated fans.
               </p>
               <p>
-                Instead of digital content that floods social media and disappears in seconds, OFFL/NE delivers something real. A physical collectible, arriving monthly, that fans can watch, own, and collect forever.
+                These pictures become REALS: physical collectibles, produced and shipped monthly. Something fans can hold, collect, and treasure — not just scroll past.
               </p>
             </div>
             <div className="space-y-6 text-white/70 text-lg leading-relaxed">
               <p>
-                No screens, no scrolling, no algorithms — just a pure, tangible experience that no other platform can offer.
+                No screens, no scrolling, no algorithms — just a pure, tangible connection that no digital platform can replicate.
               </p>
               <p className="text-glow text-white text-2xl font-black">
                 Not just another post. A personal moment.

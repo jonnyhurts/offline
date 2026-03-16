@@ -186,7 +186,7 @@ export default function TalentDashboard() {
                 <div className="bg-offline-orange/10 border border-offline-orange/30 rounded-xl p-5 mb-8">
                   <p className="text-sm text-offline-orange font-bold mb-1">EXCLUSIVE CONTENT ONLY</p>
                   <p className="text-white/60 text-sm">
-                    All pictures uploaded to OFFL/NE must be exclusive. This content cannot be shared on any other social media platform. By uploading, you agree to this exclusivity agreement.
+                    All pictures uploaded to OFFL/NE must be exclusive to this platform. They cannot be posted on any other social media or shared publicly elsewhere. By uploading, you agree to this exclusivity agreement.
                   </p>
                 </div>
 

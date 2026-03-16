@@ -16,7 +16,7 @@ export default function ForTalentPage() {
             <span className="text-offline-orange">THEIR HANDS.</span>
           </h1>
           <p className="text-xl text-white/70 max-w-2xl mb-10">
-            Give your audience something they can actually hold. OFFL/NE turns your exclusive content into physical collectibles — delivered directly to your most loyal fans.
+            Give your audience something they can actually hold. Upload 10 exclusive pictures each month — we turn them into physical collectibles and deliver them directly to your most loyal fans.
           </p>
           <Link
             href="/signup?role=talent"
@@ -37,11 +37,11 @@ export default function ForTalentPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
-              { title: "Full Creative Control", desc: "You decide what to share, when to share it, and who gets it. No algorithms deciding your reach." },
-              { title: "Revenue Sharing", desc: "Earn directly from your subscribers. A simple, transparent model where your content generates real income." },
-              { title: "Deeper Fan Connection", desc: "Move beyond likes and comments. Give your fans something personal and exclusive that builds true loyalty." },
-              { title: "Zero Effort Distribution", desc: "Just upload your content. We handle production, packaging, and worldwide delivery." },
-              { title: "Collectible Value", desc: "Your content becomes a limited-edition physical item — something fans treasure and that grows in value." },
+              { title: "Full Creative Control", desc: "You choose what to share. No algorithms, no gatekeepers — your pictures, your rules." },
+              { title: "Revenue From Day One", desc: "Earn directly from every subscriber, every month. Simple, transparent, recurring." },
+              { title: "Deeper Fan Connection", desc: "Move beyond likes and comments. Give your fans something personal that builds real loyalty." },
+              { title: "We Handle Everything", desc: "Upload 10 pictures. We produce the REALS, package them, and ship worldwide." },
+              { title: "Collectible Value", desc: "Your pictures become limited-edition physical items that fans treasure and collect." },
               { title: "No Ads, No Noise", desc: "Your content stands alone. No competing posts, no ads, no distractions." },
             ].map((item) => (
               <div key={item.title} className="bg-black/10 rounded-xl p-6">
@@ -63,10 +63,10 @@ export default function ForTalentPage() {
           </h2>
           <div className="space-y-12">
             {[
-              { step: "1", title: "Sign Up & Get Verified", desc: "Create your talent profile. We'll review your application and get you set up." },
-              { step: "2", title: "Upload Your Content", desc: "Record exclusive videos, personal messages, behind-the-scenes footage — whatever you want your fans to have." },
-              { step: "3", title: "We Produce Your REALS", desc: "Your content is transformed into physical collectible REALS, ready for delivery." },
-              { step: "4", title: "Fans Subscribe & Receive", desc: "Your subscribers receive their REALS monthly. You earn from every subscription." },
+              { step: "1", title: "Sign Up & Get Verified", desc: "Create your talent profile. We review your application and get you set up." },
+              { step: "2", title: "Upload 10 Exclusive Pictures", desc: "Each month, upload 10 pictures that are exclusive to OFFL/NE — not shared anywhere else." },
+              { step: "3", title: "We Produce Your REALS", desc: "Your pictures are transformed into physical collectible REALS, printed and packaged for delivery." },
+              { step: "4", title: "Fans Subscribe & Collect", desc: "Subscribers receive their REALS monthly at their door. You earn from every subscription." },
             ].map((item) => (
               <div key={item.step} className="flex gap-6 items-start">
                 <div className="text-4xl font-black text-offline-orange w-12 flex-shrink-0">{item.step}</div>

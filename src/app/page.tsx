@@ -62,13 +62,13 @@ export default function Home() {
           </div>
           <div className="text-black/80 text-lg leading-relaxed space-y-5">
             <p className="text-xl font-bold text-black">
-              We&apos;re transforming a classic viewing format into something entirely new — a physical collectible that allows talent, brands, musicians, athletes, and influencers to share exclusive, personal content with their audience.
+              OFFL/NE is a new kind of platform — where talent shares exclusive pictures that become physical collectibles, delivered straight to their most dedicated fans every month.
             </p>
             <p>
-              Unlike digital content that floods social media and disappears in seconds, this is something real — a physical item, delivered monthly, that fans can watch, own, and collect forever.
+              Unlike digital content that floods social media and disappears in seconds, REALS are something you can hold, own, and collect forever.
             </p>
             <p>
-              No screens, no scrolling — just a pure, tangible experience that creates a deeper connection between those with a following and the people who support them.
+              No algorithms, no noise — just a direct, tangible connection between talent and the people who truly support them.
             </p>
             <p className="text-glow text-white text-2xl font-black pt-4">
               Not just another post. A personal moment.
@@ -99,7 +99,7 @@ export default function Home() {
               OFFL/NE creates a deeper, more personal connection between talent and their audience — something no digital platform can offer.
             </p>
             <p>
-              Fans receive authentic moments straight from their favorite talent, whether it&apos;s behind-the-scenes footage, personal messages, or exclusive insights — all delivered offline for a real, tangible experience they can own and collect.
+              Fans receive exclusive, never-before-seen pictures from their favorite talent — printed as collectible REALS and delivered to their door. No reposts, no screenshots. Just yours.
             </p>
             <p className="text-glow text-white text-2xl font-black pt-4">
               And truly yours.
@@ -127,10 +127,10 @@ export default function Home() {
           </div>
           <div className="text-black/80 text-lg leading-relaxed space-y-5">
             <p className="text-xl font-bold text-black">
-              Collectibles have always held value. True exclusivity creates value, and OFFL/NE is built on that principle.
+              True exclusivity creates value. OFFL/NE is built on that principle.
             </p>
             <p>
-              Every release is available only through OFFL/NE, ensuring controlled access and giving talent full control over who sees their content. There are no reposts, no leaks — this content isn&apos;t mass-shared but reserved only for those who choose to be part of it.
+              Every REAL is a limited-edition collectible, available only through OFFL/NE. Talent has full control over what they share and who receives it. No reposts, no leaks — reserved for those who choose to be part of it.
             </p>
             <p className="text-glow text-white text-2xl font-black pt-4">
               This is the future of collectibles.
@@ -158,10 +158,10 @@ export default function Home() {
           </div>
           <div className="text-black/80 text-lg leading-relaxed space-y-5">
             <p className="text-xl font-bold text-black">
-              OFFL/NE represents a seamless, scalable business model that merges physical collectibles with an easy-to-use digital platform.
+              A seamless, scalable model that merges physical collectibles with an easy-to-use digital platform.
             </p>
             <p>
-              The app and platform are lightweight, specifically designed for managing subscriptions, uploading content, and automating fulfillment. Shipping is quick, affordable, and worldwide.
+              Talent uploads 10 exclusive pictures each month. We handle production, packaging, and worldwide delivery. Fans subscribe, receive, and collect. That&apos;s it.
             </p>
             <p className="text-glow text-white text-2xl font-black pt-4">
               Easy to start, impossible to stop.
