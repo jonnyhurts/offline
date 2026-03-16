@@ -1,4 +1,5 @@
 import FilmStrip from "@/components/FilmStrip";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
@@ -26,6 +27,23 @@ export default function ForFansPage() {
           </Link>
         </div>
         <FilmStrip className="mt-12" />
+      </section>
+
+      {/* Product Shot */}
+      <section className="bg-black py-16 px-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <Image
+            src="/offline-viewer.png"
+            alt="The OFFL/NE Viewer with a REALS disc"
+            width={800}
+            height={600}
+            className="w-full drop-shadow-2xl"
+            priority
+          />
+          <p className="text-white/40 text-sm font-bold mt-4">
+            The OFFL/NE Viewer — your window into exclusive content
+          </p>
+        </div>
       </section>
 
       {/* What You Get */}

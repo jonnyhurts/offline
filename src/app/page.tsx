@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import FilmStrip from "@/components/FilmStrip";
 import PowerIcon from "@/components/PowerIcon";
 
@@ -60,18 +61,17 @@ export default function Home() {
               ))}
             </ul>
           </div>
-          <div className="text-black/80 text-lg leading-relaxed space-y-5">
-            <p className="text-xl font-bold text-black">
-              OFFL/NE is a new kind of platform — where talent shares exclusive pictures that become physical collectibles, delivered straight to their most dedicated fans every month.
-            </p>
-            <p>
-              Unlike digital content that floods social media and disappears in seconds, REALS are something you can hold, own, and collect forever.
-            </p>
-            <p>
-              No algorithms, no noise — just a direct, tangible connection between talent and the people who truly support them.
-            </p>
-            <p className="text-glow text-white text-2xl font-black pt-4">
-              Not just another post. A personal moment.
+          <div className="flex flex-col items-center">
+            <Image
+              src="/offline-viewer.png"
+              alt="The OFFL/NE Viewer — hold your REALS and see exclusive content"
+              width={600}
+              height={450}
+              className="w-full max-w-lg drop-shadow-2xl"
+              priority
+            />
+            <p className="text-black/70 text-sm font-bold mt-4 text-center">
+              The OFFL/NE Viewer + REALS disc
             </p>
           </div>
         </div>
