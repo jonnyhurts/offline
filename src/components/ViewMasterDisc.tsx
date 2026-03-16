@@ -340,13 +340,11 @@ export default function ViewMasterDisc({
                   src={labelImage}
                   alt="Center label"
                   className="w-full h-full object-cover"
-                  style={{ transform: `rotate(${-rotation}deg)` }}
                   draggable={false}
                 />
               ) : (
                 <div
                   className="text-center"
-                  style={{ transform: `rotate(${-rotation}deg)` }}
                 >
                   <div
                     className="font-bold uppercase tracking-wider"

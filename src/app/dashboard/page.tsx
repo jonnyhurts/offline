@@ -16,6 +16,26 @@ type MonthData = {
 
 type YearData = Record<number, MonthData>;
 
+// Generate a placeholder image data URL with a given color
+function makePlaceholder(color: string): string {
+  if (typeof document === "undefined") return "";
+  const c = document.createElement("canvas");
+  c.width = 200;
+  c.height = 200;
+  const ctx = c.getContext("2d");
+  if (ctx) {
+    ctx.fillStyle = color;
+    ctx.fillRect(0, 0, 200, 200);
+  }
+  return c.toDataURL("image/png");
+}
+
+const DEMO_COLORS = [
+  "#E8461C", "#1a1a2e", "#16213e", "#0f3460", "#533483",
+  "#e94560", "#2b2d42", "#8d99ae", "#ef233c", "#d90429",
+  "#f4a261",
+];
+
 export default function TalentDashboard() {
   const [activeTab, setActiveTab] = useState<"overview" | "upload" | "reals" | "subscribers">("overview");
   const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
@@ -24,6 +44,11 @@ export default function TalentDashboard() {
     for (let i = 0; i < 12; i++) {
       data[i] = { images: [], confirmed: false };
     }
+    // Pre-fill January with demo images
+    data[0] = {
+      images: DEMO_COLORS.map((color) => makePlaceholder(color)),
+      confirmed: true,
+    };
     return data;
   });
   const [agreedExclusive, setAgreedExclusive] = useState(false);
