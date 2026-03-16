@@ -300,6 +300,23 @@ export default function ViewMasterDisc({
               </div>
             )}
 
+            {/* OFFL/NE logo in orange below center label */}
+            <div
+              className="absolute pointer-events-none flex flex-col items-center"
+              style={{
+                top: "50%",
+                left: "50%",
+                transform: `translate(-50%, ${LABEL_SIZE / 2 + size * 0.012}px)`,
+              }}
+            >
+              <span
+                className="font-black tracking-[0.15em] whitespace-nowrap"
+                style={{ fontSize: size * 0.028, color: "#E8461C" }}
+              >
+                {"OFFL/NE"}
+              </span>
+            </div>
+
             {/* Center label area (picture 11) */}
             <div
               className="absolute rounded-full overflow-hidden flex items-center justify-center"
