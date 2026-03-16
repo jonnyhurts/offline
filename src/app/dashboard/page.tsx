@@ -35,7 +35,7 @@ export default function TalentDashboard() {
   function handleFileUpload(monthIndex: number, files: FileList | null) {
     if (!files) return;
     const current = monthsData[monthIndex];
-    const remaining = 10 - current.images.length;
+    const remaining = 11 - current.images.length;
     const toAdd = Array.from(files).slice(0, remaining);
 
     toAdd.forEach((file) => {
@@ -44,7 +44,7 @@ export default function TalentDashboard() {
         setMonthsData((prev) => {
           const updated = { ...prev };
           const monthData = { ...updated[monthIndex] };
-          if (monthData.images.length < 10) {
+          if (monthData.images.length < 11) {
             monthData.images = [...monthData.images, e.target?.result as string];
             updated[monthIndex] = monthData;
           }
@@ -69,7 +69,7 @@ export default function TalentDashboard() {
   function startReview() {
     setReviewing(true);
     setReviewIndex(0);
-    setApprovedImages(new Array(10).fill(false));
+    setApprovedImages(new Array(11).fill(false));
   }
 
   function approveImage(index: number) {
@@ -78,7 +78,7 @@ export default function TalentDashboard() {
       next[index] = true;
       return next;
     });
-    if (index < 9) {
+    if (index < 10) {
       setReviewIndex(index + 1);
     }
   }
@@ -225,8 +225,8 @@ export default function TalentDashboard() {
 
                         <div className="text-white/40 text-sm">
                           {isConfirmed
-                            ? "10/10 — Confirmed"
-                            : `${imageCount}/10 pictures`}
+                            ? "11/11 — Confirmed"
+                            : `${imageCount}/11 pictures`}
                         </div>
 
                         {/* Mini progress bar */}
@@ -235,7 +235,7 @@ export default function TalentDashboard() {
                             className={`h-full rounded-full transition-all ${
                               isConfirmed ? "bg-green-500" : imageCount > 0 ? "bg-offline-orange" : "bg-red-500/40"
                             }`}
-                            style={{ width: `${(imageCount / 10) * 100}%` }}
+                            style={{ width: `${(imageCount / 11) * 100}%` }}
                           />
                         </div>
                       </button>
@@ -263,7 +263,7 @@ export default function TalentDashboard() {
                       ? "bg-green-500/20 text-green-400"
                       : "bg-red-500/20 text-red-400"
                   }`}>
-                    {monthsData[selectedMonth].images.length}/10 pictures
+                    {monthsData[selectedMonth].images.length}/11 pictures
                   </span>
                 </div>
 
@@ -285,12 +285,12 @@ export default function TalentDashboard() {
                   </div>
                 )}
 
-                {/* Image grid — slots 1-9 are ring pictures, slot 10 is the center label */}
-                <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6">
-                  {Array.from({ length: 10 }).map((_, i) => {
+                {/* Image grid — slots 1-10 are ring pictures, slot 11 is the center label */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+                  {Array.from({ length: 11 }).map((_, i) => {
                     const img = monthsData[selectedMonth].images[i];
                     const isConfirmed = monthsData[selectedMonth].confirmed;
-                    const isLabel = i === 9;
+                    const isLabel = i === 10;
 
                     if (img) {
                       return (
@@ -349,7 +349,7 @@ export default function TalentDashboard() {
                 </div>
 
                 {/* Drop zone for bulk upload */}
-                {agreedExclusive && !monthsData[selectedMonth].confirmed && monthsData[selectedMonth].images.length < 10 && (
+                {agreedExclusive && !monthsData[selectedMonth].confirmed && monthsData[selectedMonth].images.length < 11 && (
                   <div
                     onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
                     onDragLeave={() => setDragOver(false)}
@@ -366,18 +366,18 @@ export default function TalentDashboard() {
                       Drag and drop pictures here, or click the slots above
                     </p>
                     <p className="text-white/20 text-xs mt-1">
-                      {10 - monthsData[selectedMonth].images.length} more needed
+                      {11 - monthsData[selectedMonth].images.length} more needed
                     </p>
                   </div>
                 )}
 
                 {/* Review & Confirm flow */}
-                {monthsData[selectedMonth].images.length === 10 && !monthsData[selectedMonth].confirmed && !reviewing && (
+                {monthsData[selectedMonth].images.length === 11 && !monthsData[selectedMonth].confirmed && !reviewing && (
                   <button
                     onClick={startReview}
                     className="w-full bg-offline-orange hover:bg-offline-orange-light text-white font-black py-4 rounded-full transition-colors text-lg"
                   >
-                    REVIEW ALL 10 PICTURES
+                    REVIEW ALL 11 PICTURES
                   </button>
                 )}
 
@@ -387,7 +387,7 @@ export default function TalentDashboard() {
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-lg font-black">Review Your Pictures</h3>
                       <span className="text-sm text-white/40">
-                        {approvedImages.filter(Boolean).length}/10 approved
+                        {approvedImages.filter(Boolean).length}/11 approved
                       </span>
                     </div>
 
@@ -417,7 +417,7 @@ export default function TalentDashboard() {
                           className="w-full h-full object-cover"
                         />
                         <div className="absolute top-3 left-3 bg-black/80 text-white text-sm font-bold px-3 py-1 rounded-full">
-                          Picture {reviewIndex + 1} of 10
+                          {reviewIndex === 10 ? "Label" : `Picture ${reviewIndex + 1}`} of 11
                         </div>
                         {approvedImages[reviewIndex] && (
                           <div className="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">
@@ -446,10 +446,10 @@ export default function TalentDashboard() {
                           </button>
                         ) : (
                           <button
-                            onClick={() => reviewIndex < 9 ? setReviewIndex(reviewIndex + 1) : null}
+                            onClick={() => reviewIndex < 10 ? setReviewIndex(reviewIndex + 1) : null}
                             className="flex-1 bg-white/10 hover:bg-white/20 text-white font-bold py-3 rounded-full transition-colors"
                           >
-                            {reviewIndex < 9 ? "Next" : "Done"}
+                            {reviewIndex < 10 ? "Next" : "Done"}
                           </button>
                         )}
                       </div>
@@ -474,7 +474,7 @@ export default function TalentDashboard() {
                       <path d="M35 50l10 10 20-20" stroke="#22c55e" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     <p className="text-green-400 font-black text-lg">{MONTHS[selectedMonth]} is confirmed!</p>
-                    <p className="text-white/40 text-sm mt-1">10 exclusive pictures locked in for this month.</p>
+                    <p className="text-white/40 text-sm mt-1">10 exclusive pictures + label locked in for this month.</p>
                   </div>
                 )}
 
@@ -483,7 +483,7 @@ export default function TalentDashboard() {
                   <div className="mt-8 pt-8 border-t border-white/10">
                     <h3 className="text-lg font-black mb-4">Disc Preview</h3>
                     <p className="text-white/40 text-xs mb-6">
-                      Pictures 1-9 appear on the ring · Picture 10 is the center label
+                      Pictures 1-10 appear on the ring · Picture 11 is the center label
                     </p>
                     <ViewMasterDisc
                       images={monthsData[selectedMonth].images}

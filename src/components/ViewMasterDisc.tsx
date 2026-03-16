@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 
 interface ViewMasterDiscProps {
-  images: string[]; // up to 10: [0-8] = ring slots, [9] = center label
+  images: string[]; // up to 11: [0-9] = 10 ring slots, [10] = center label
   month?: string;
   year?: string;
 }
@@ -49,14 +49,14 @@ export default function ViewMasterDisc({
     return () => cancelAnimationFrame(animRef.current);
   }, [dragging, velocity]);
 
-  const RING_SLOTS = 9;
+  const RING_SLOTS = 10;
   const ANGLE_STEP = 360 / RING_SLOTS;
-  const SLOT_RADIUS = size * 0.34;
-  const SLOT_SIZE = size * 0.115; // square slots
-  const LABEL_SIZE = size * 0.34; // bigger center label
-  const HOLE_SIZE = size * 0.05;
-  const PERF_RADIUS = size * 0.455;
-  const PERF_SIZE = size * 0.022;
+  const SLOT_RADIUS = size * 0.35;
+  const SLOT_SIZE = size * 0.105;
+  const LABEL_SIZE = size * 0.30;
+  const HOLE_SIZE = size * 0.045;
+  const PERF_RADIUS = size * 0.46;
+  const PERF_SIZE = size * 0.02;
 
   const getAngle = useCallback(
     (clientX: number, clientY: number) => {
@@ -95,11 +95,11 @@ export default function ViewMasterDisc({
 
   const handlePointerUp = () => setDragging(false);
 
-  const ringImages = images.slice(0, 9);
-  const labelImage = images[9] || null;
+  const ringImages = images.slice(0, 10);
+  const labelImage = images[10] || null;
   const filledRing = ringImages.filter(Boolean).length;
   const hasLabel = !!labelImage;
-  const isComplete = filledRing === 9 && hasLabel;
+  const isComplete = filledRing === 10 && hasLabel;
 
   return (
     <div ref={containerRef} className="w-full max-w-[480px] mx-auto">
@@ -120,19 +120,19 @@ export default function ViewMasterDisc({
               style={{
                 inset: -8,
                 background:
-                  "radial-gradient(circle, rgba(232,70,28,0.15) 0%, transparent 70%)",
+                  "radial-gradient(circle, rgba(232,70,28,0.2) 0%, transparent 70%)",
               }}
             />
           )}
 
-          {/* Main disc body */}
+          {/* Main disc body — WHITE */}
           <div
             className="absolute inset-0 rounded-full"
             style={{
               background:
-                "radial-gradient(circle at 42% 38%, #383838 0%, #222 35%, #181818 60%, #0e0e0e 100%)",
+                "radial-gradient(circle at 42% 38%, #ffffff 0%, #f5f5f5 35%, #e8e8e8 60%, #ddd 100%)",
               boxShadow:
-                "0 16px 48px rgba(0,0,0,0.7), 0 6px 16px rgba(0,0,0,0.5), inset 0 1px 3px rgba(255,255,255,0.07), inset 0 -2px 6px rgba(0,0,0,0.4)",
+                "0 16px 48px rgba(0,0,0,0.25), 0 6px 16px rgba(0,0,0,0.15), inset 0 1px 3px rgba(255,255,255,0.8), inset 0 -2px 6px rgba(0,0,0,0.08)",
               transform: `rotate(${rotation}deg)`,
               transition: dragging ? "none" : "transform 0.1s linear",
               cursor: dragging ? "grabbing" : "grab",
@@ -143,7 +143,7 @@ export default function ViewMasterDisc({
               className="absolute rounded-full"
               style={{
                 inset: size * 0.012,
-                border: "1.5px solid rgba(255,255,255,0.05)",
+                border: "1.5px solid rgba(0,0,0,0.08)",
               }}
             />
 
@@ -156,8 +156,8 @@ export default function ViewMasterDisc({
                   width: PERF_SIZE,
                   height: PERF_SIZE,
                   borderRadius: 2,
-                  background: "rgba(0,0,0,0.55)",
-                  border: "0.5px solid rgba(255,255,255,0.04)",
+                  background: "rgba(0,0,0,0.08)",
+                  border: "0.5px solid rgba(0,0,0,0.05)",
                   top: "50%",
                   left: "50%",
                   marginLeft: -PERF_SIZE / 2,
@@ -172,7 +172,7 @@ export default function ViewMasterDisc({
               className="absolute rounded-full"
               style={{
                 inset: size * 0.07,
-                border: "0.5px solid rgba(255,255,255,0.035)",
+                border: "0.5px solid rgba(0,0,0,0.06)",
               }}
             />
 
@@ -181,15 +181,15 @@ export default function ViewMasterDisc({
               className="absolute rounded-full"
               style={{
                 inset: size * 0.14,
-                border: "0.5px solid rgba(255,255,255,0.03)",
+                border: "0.5px solid rgba(0,0,0,0.05)",
               }}
             />
 
             {/* Notch marks between slots */}
             {Array.from({ length: RING_SLOTS }).map((_, i) => {
               const angle = i * ANGLE_STEP + ANGLE_STEP / 2 - 90;
-              const notchW = size * 0.012;
-              const notchH = size * 0.03;
+              const notchW = size * 0.01;
+              const notchH = size * 0.025;
               return (
                 <div
                   key={`notch-${i}`}
@@ -198,8 +198,7 @@ export default function ViewMasterDisc({
                     width: notchW,
                     height: notchH,
                     borderRadius: notchW / 2,
-                    background: "rgba(0,0,0,0.45)",
-                    border: "0.5px solid rgba(255,255,255,0.03)",
+                    background: "rgba(0,0,0,0.1)",
                     top: "50%",
                     left: "50%",
                     marginLeft: -notchW / 2,
@@ -210,7 +209,7 @@ export default function ViewMasterDisc({
               );
             })}
 
-            {/* 9 ring image slots (square) */}
+            {/* 10 ring image slots (square) */}
             {Array.from({ length: RING_SLOTS }).map((_, i) => {
               const angle = i * ANGLE_STEP - 90;
               const img = ringImages[i];
@@ -222,18 +221,18 @@ export default function ViewMasterDisc({
                   style={{
                     width: SLOT_SIZE,
                     height: SLOT_SIZE,
-                    borderRadius: size * 0.012,
+                    borderRadius: size * 0.01,
                     top: "50%",
                     left: "50%",
                     marginLeft: -SLOT_SIZE / 2,
                     marginTop: -SLOT_SIZE / 2,
                     transform: `rotate(${angle}deg) translateY(-${SLOT_RADIUS}px)`,
                     border: img
-                      ? "2px solid rgba(255,255,255,0.18)"
-                      : "1.5px dashed rgba(232, 70, 28, 0.25)",
-                    background: img ? "#000" : "rgba(232, 70, 28, 0.02)",
+                      ? "2px solid rgba(0,0,0,0.15)"
+                      : "1.5px dashed rgba(232, 70, 28, 0.35)",
+                    background: img ? "#000" : "rgba(232, 70, 28, 0.04)",
                     boxShadow: img
-                      ? "inset 0 0 6px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.3)"
+                      ? "inset 0 0 4px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.1)"
                       : "none",
                   }}
                 >
@@ -247,9 +246,10 @@ export default function ViewMasterDisc({
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
                       <span
-                        className="text-offline-orange/25 font-bold"
+                        className="font-bold"
                         style={{
-                          fontSize: size * 0.022,
+                          fontSize: size * 0.02,
+                          color: "rgba(232, 70, 28, 0.3)",
                           transform: `rotate(${-angle}deg)`,
                         }}
                       >
@@ -273,8 +273,8 @@ export default function ViewMasterDisc({
                 }}
               >
                 <span
-                  className="font-black tracking-[0.2em] text-white/5 whitespace-nowrap"
-                  style={{ fontSize: size * 0.016 }}
+                  className="font-black tracking-[0.2em] whitespace-nowrap"
+                  style={{ fontSize: size * 0.014, color: "rgba(0,0,0,0.08)" }}
                 >
                   {"OFFL/NE REALS"}
                 </span>
@@ -292,15 +292,15 @@ export default function ViewMasterDisc({
                 }}
               >
                 <span
-                  className="font-black tracking-[0.15em] text-white/5 whitespace-nowrap uppercase"
-                  style={{ fontSize: size * 0.014 }}
+                  className="font-black tracking-[0.15em] whitespace-nowrap uppercase"
+                  style={{ fontSize: size * 0.012, color: "rgba(0,0,0,0.08)" }}
                 >
                   {month} {year || ""}
                 </span>
               </div>
             )}
 
-            {/* Center label area (picture 10) */}
+            {/* Center label area (picture 11) */}
             <div
               className="absolute rounded-full overflow-hidden flex items-center justify-center"
               style={{
@@ -312,16 +312,16 @@ export default function ViewMasterDisc({
                 marginTop: -LABEL_SIZE / 2,
                 background: labelImage
                   ? "transparent"
-                  : "radial-gradient(circle, #1e1e1e 0%, #131313 100%)",
-                border: "2.5px solid rgba(255,255,255,0.1)",
+                  : "radial-gradient(circle, #f0f0f0 0%, #e0e0e0 100%)",
+                border: "2.5px solid rgba(0,0,0,0.1)",
                 boxShadow:
-                  "inset 0 2px 10px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,0,0,0.3)",
+                  "inset 0 2px 8px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.05)",
               }}
             >
               {labelImage ? (
                 <img
                   src={labelImage}
-                  alt="Center label (picture 10)"
+                  alt="Center label"
                   className="w-full h-full object-cover"
                   style={{ transform: `rotate(${-rotation}deg)` }}
                   draggable={false}
@@ -332,14 +332,14 @@ export default function ViewMasterDisc({
                   style={{ transform: `rotate(${-rotation}deg)` }}
                 >
                   <div
-                    className="text-white/15 font-bold uppercase tracking-wider"
-                    style={{ fontSize: size * 0.022 }}
+                    className="font-bold uppercase tracking-wider"
+                    style={{ fontSize: size * 0.022, color: "rgba(0,0,0,0.15)" }}
                   >
-                    10
+                    11
                   </div>
                   <div
-                    className="text-white/10 uppercase tracking-wider"
-                    style={{ fontSize: size * 0.016 }}
+                    className="uppercase tracking-wider"
+                    style={{ fontSize: size * 0.014, color: "rgba(0,0,0,0.1)" }}
                   >
                     Label
                   </div>
@@ -357,9 +357,9 @@ export default function ViewMasterDisc({
                   marginLeft: -HOLE_SIZE / 2,
                   marginTop: -HOLE_SIZE / 2,
                   background:
-                    "radial-gradient(circle, #000 50%, #0a0a0a 100%)",
-                  border: "2px solid rgba(255,255,255,0.06)",
-                  boxShadow: "inset 0 1px 4px rgba(0,0,0,0.8)",
+                    "radial-gradient(circle, #333 50%, #222 100%)",
+                  border: "2px solid rgba(0,0,0,0.15)",
+                  boxShadow: "inset 0 1px 4px rgba(0,0,0,0.5)",
                 }}
               />
             </div>
@@ -372,7 +372,7 @@ export default function ViewMasterDisc({
             <span
               className={`text-sm font-bold ${isComplete ? "text-green-400" : "text-white/40"}`}
             >
-              {filledRing + (hasLabel ? 1 : 0)}/10 pictures loaded
+              {filledRing + (hasLabel ? 1 : 0)}/11 pictures loaded
             </span>
             {isComplete && (
               <svg
@@ -393,7 +393,7 @@ export default function ViewMasterDisc({
             )}
           </div>
           <p className="text-white/25 text-xs">
-            Drag to rotate · Pictures 1-9 on ring · Picture 10 is the label
+            Drag to rotate · Pictures 1-10 on ring · Picture 11 is the label
           </p>
         </div>
       </div>
