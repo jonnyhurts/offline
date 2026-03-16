@@ -1,26 +1,69 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-offline-orange: #E8461C;
+  --color-offline-dark: #1a1a1a;
+  --color-offline-black: #000000;
+  --color-offline-white: #ffffff;
+  --color-offline-orange-light: #FF6B3D;
+  --color-offline-orange-dark: #C43A17;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: #000000;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Film strip animation */
+@keyframes filmScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.film-scroll {
+  animation: filmScroll 20s linear infinite;
+}
+
+/* Glow effect for taglines - brighter like PDF */
+.text-glow {
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.4), 0 0 90px rgba(255, 255, 255, 0.2);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Bold stacked text like PDF slides */
+.stacked-heading {
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+}
+
+/* Pulse for CTAs */
+@keyframes pulse-orange {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 70, 28, 0.4); }
+  50% { box-shadow: 0 0 0 14px rgba(232, 70, 28, 0); }
+}
+
+.pulse-cta {
+  animation: pulse-orange 2s ease-in-out infinite;
+}
+
+/* Skew slash */
+.skew-slash {
+  display: inline-block;
+  transform: skewX(-14deg);
+}
+
+/* Marquee for film strip */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee {
+  animation: marquee 12s linear infinite;
 }
