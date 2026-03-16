@@ -17,8 +17,7 @@ type MonthData = {
 type YearData = Record<number, MonthData>;
 
 export default function TalentDashboard() {
-  const [activeTab, setActiveTab] = useState<"overview" | "upload" | "design" | "reals" | "subscribers">("overview");
-  const [labelImages, setLabelImages] = useState<Record<number, string>>({});
+  const [activeTab, setActiveTab] = useState<"overview" | "upload" | "reals" | "subscribers">("overview");
   const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
   const [monthsData, setMonthsData] = useState<YearData>(() => {
     const data: YearData = {};
@@ -117,7 +116,7 @@ export default function TalentDashboard() {
 
           {/* Tabs */}
           <div className="flex gap-1 mt-6 overflow-x-auto">
-            {(["overview", "upload", "design", "reals", "subscribers"] as const).map((tab) => (
+            {(["overview", "upload", "reals", "subscribers"] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -286,15 +285,16 @@ export default function TalentDashboard() {
                   </div>
                 )}
 
-                {/* Image grid */}
+                {/* Image grid — slots 1-9 are ring pictures, slot 10 is the center label */}
                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6">
                   {Array.from({ length: 10 }).map((_, i) => {
                     const img = monthsData[selectedMonth].images[i];
                     const isConfirmed = monthsData[selectedMonth].confirmed;
+                    const isLabel = i === 9;
 
                     if (img) {
                       return (
-                        <div key={i} className="relative aspect-square rounded-xl overflow-hidden border-2 border-white/10 group">
+                        <div key={i} className={`relative aspect-square rounded-xl overflow-hidden border-2 group ${isLabel ? "border-offline-orange/40" : "border-white/10"}`}>
                           <img src={img} alt={`Upload ${i + 1}`} className="w-full h-full object-cover" />
                           {!isConfirmed && (
                             <button
@@ -304,8 +304,8 @@ export default function TalentDashboard() {
                               X
                             </button>
                           )}
-                          <div className="absolute bottom-1.5 left-1.5 bg-black/70 text-white text-xs font-bold px-2 py-0.5 rounded">
-                            {i + 1}
+                          <div className={`absolute bottom-1.5 left-1.5 text-white text-xs font-bold px-2 py-0.5 rounded ${isLabel ? "bg-offline-orange/90" : "bg-black/70"}`}>
+                            {isLabel ? "LABEL" : i + 1}
                           </div>
                         </div>
                       );
@@ -316,7 +316,9 @@ export default function TalentDashboard() {
                         key={i}
                         className={`aspect-square rounded-xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer transition-colors ${
                           agreedExclusive && !isConfirmed
-                            ? "border-white/20 hover:border-offline-orange hover:bg-offline-orange/5"
+                            ? isLabel
+                              ? "border-offline-orange/30 hover:border-offline-orange hover:bg-offline-orange/5"
+                              : "border-white/20 hover:border-offline-orange hover:bg-offline-orange/5"
                             : "border-white/10 opacity-40 cursor-not-allowed"
                         }`}
                       >
@@ -329,13 +331,17 @@ export default function TalentDashboard() {
                               className="hidden"
                               onChange={(e) => handleFileUpload(selectedMonth, e.target.files)}
                             />
-                            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white/30 mb-1">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" className={`mb-1 ${isLabel ? "text-offline-orange/40" : "text-white/30"}`}>
                               <path d="M12 5v14M5 12h14" />
                             </svg>
-                            <span className="text-white/30 text-xs">{i + 1}</span>
+                            <span className={`text-xs ${isLabel ? "text-offline-orange/40 font-bold" : "text-white/30"}`}>
+                              {isLabel ? "LABEL" : i + 1}
+                            </span>
                           </>
                         ) : (
-                          <span className="text-white/20 text-xs">{i + 1}</span>
+                          <span className={`text-xs ${isLabel ? "text-offline-orange/20 font-bold" : "text-white/20"}`}>
+                            {isLabel ? "LABEL" : i + 1}
+                          </span>
                         )}
                       </label>
                     );
@@ -475,147 +481,17 @@ export default function TalentDashboard() {
                 {/* Disc Preview in upload view */}
                 {monthsData[selectedMonth].images.length > 0 && (
                   <div className="mt-8 pt-8 border-t border-white/10">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-lg font-black">Disc Preview</h3>
-                      <button
-                        onClick={() => { setActiveTab("design"); }}
-                        className="text-sm text-offline-orange hover:underline font-bold"
-                      >
-                        Full Designer →
-                      </button>
-                    </div>
+                    <h3 className="text-lg font-black mb-4">Disc Preview</h3>
+                    <p className="text-white/40 text-xs mb-6">
+                      Pictures 1-9 appear on the ring · Picture 10 is the center label
+                    </p>
                     <ViewMasterDisc
                       images={monthsData[selectedMonth].images}
-                      labelImage={labelImages[selectedMonth] || null}
-                      onLabelUpload={(dataUrl) =>
-                        setLabelImages((prev) => ({ ...prev, [selectedMonth!]: dataUrl }))
-                      }
                       month={MONTHS[selectedMonth]}
                       year="2026"
                     />
                   </div>
                 )}
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Design Your REAL */}
-        {activeTab === "design" && (
-          <div>
-            <h2 className="text-xl font-black mb-2">Design Your REAL</h2>
-            <p className="text-white/50 text-sm mb-8">
-              Preview how your disc will look. Select a month to see your pictures on the disc, and add a center label.
-            </p>
-
-            {/* Month selector */}
-            <div className="flex gap-2 mb-8 overflow-x-auto pb-2">
-              {MONTHS.map((month, i) => {
-                const hasImages = monthsData[i].images.length > 0;
-                return (
-                  <button
-                    key={month}
-                    onClick={() => setSelectedMonth(i)}
-                    className={`px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-colors ${
-                      selectedMonth === i
-                        ? "bg-offline-orange text-white"
-                        : hasImages
-                          ? "bg-white/10 text-white hover:bg-white/20"
-                          : "bg-white/5 text-white/30 hover:bg-white/10"
-                    }`}
-                  >
-                    {month.slice(0, 3)}
-                    {hasImages && (
-                      <span className="ml-1.5 text-xs opacity-60">
-                        ({monthsData[i].images.length})
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-
-            {selectedMonth !== null ? (
-              <div className="flex flex-col lg:flex-row gap-8 items-start">
-                {/* Disc preview */}
-                <div className="flex-1 w-full">
-                  <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-6 sm:p-10">
-                    <ViewMasterDisc
-                      images={monthsData[selectedMonth].images}
-                      labelImage={labelImages[selectedMonth] || null}
-                      onLabelUpload={(dataUrl) =>
-                        setLabelImages((prev) => ({ ...prev, [selectedMonth]: dataUrl }))
-                      }
-                      month={MONTHS[selectedMonth]}
-                      year="2026"
-                    />
-                  </div>
-                </div>
-
-                {/* Side panel */}
-                <div className="w-full lg:w-72 space-y-4">
-                  <div className="bg-white/5 border border-white/10 rounded-xl p-5">
-                    <h3 className="font-bold text-sm mb-3">
-                      {MONTHS[selectedMonth]} 2026
-                    </h3>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex justify-between">
-                        <span className="text-white/50">Pictures</span>
-                        <span className={monthsData[selectedMonth].images.length === 10 ? "text-green-400 font-bold" : "text-white/70"}>
-                          {monthsData[selectedMonth].images.length}/10
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-white/50">Center Label</span>
-                        <span className={labelImages[selectedMonth] ? "text-green-400 font-bold" : "text-white/30"}>
-                          {labelImages[selectedMonth] ? "Added" : "Not set"}
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-white/50">Status</span>
-                        <span className={monthsData[selectedMonth].confirmed ? "text-green-400 font-bold" : "text-red-400"}>
-                          {monthsData[selectedMonth].confirmed ? "Confirmed" : "Pending"}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {monthsData[selectedMonth].images.length === 0 && (
-                    <div className="bg-offline-orange/10 border border-offline-orange/30 rounded-xl p-5 text-center">
-                      <p className="text-white/50 text-sm mb-3">
-                        No pictures uploaded for {MONTHS[selectedMonth]} yet.
-                      </p>
-                      <button
-                        onClick={() => setActiveTab("upload")}
-                        className="bg-offline-orange hover:bg-offline-orange-light text-white font-bold text-sm px-5 py-2.5 rounded-full transition-colors"
-                      >
-                        Upload Pictures
-                      </button>
-                    </div>
-                  )}
-
-                  {labelImages[selectedMonth] && (
-                    <button
-                      onClick={() =>
-                        setLabelImages((prev) => {
-                          const next = { ...prev };
-                          delete next[selectedMonth!];
-                          return next;
-                        })
-                      }
-                      className="w-full bg-white/5 hover:bg-white/10 text-white/50 hover:text-white font-bold text-sm py-2.5 rounded-full transition-colors"
-                    >
-                      Remove Label
-                    </button>
-                  )}
-                </div>
-              </div>
-            ) : (
-              <div className="text-center py-16">
-                <div className="text-white/20 text-6xl mb-4">&#9673;</div>
-                <p className="text-white/40 text-sm">
-                  Select a month above to preview your REAL disc
-                </p>
               </div>
             )}
           </div>
